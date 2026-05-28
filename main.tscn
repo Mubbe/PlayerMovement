@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://djh80ioh3khbn"]
+
+[ext_resource type="Script" uid="uid://dy0u6pqddwin7" path="res://Player.cs" id="1_ig7tw"]
+
+[sub_resource type="Curve" id="Curve_ig7tw"]
+_data = [Vector2(0, 0), 0.0, 4.473293, 0, 0, Vector2(0.31170887, 0.8389424), 0.0, 0.0, 0, 0, Vector2(0.6044304, 0.80048084), 0.0, 0.0, 0, 0, Vector2(0.8164557, 0.13701928), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ig7tw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(0.79833984, 0.32183838, 3.081604)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(3, 5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+size = Vector3(30, 2, 30)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ig7tw"]
+points = PackedVector3Array(-15.238094, -1.2380953, -15.238096, 15.238094, 1.1428571, 15.238096, 15.238094, -1.2380953, 15.238096, 15.238094, 1.1428571, -15.238096, -15.238094, 1.1428571, 15.238096, -15.238094, -1.2380953, 15.238096, 15.238094, -1.2380953, -15.238096, -15.238094, 1.1428571, -15.238096)
+
+[sub_resource type="Animation" id="Animation_h2yge"]
+resource_name = "Crouch"
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/MeshPivot/MeshScale/MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.23333333, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/MeshPivot/MeshScale/MeshInstance3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.26666668, 1, 0, 0.5, 0, 0.5, 1, 0, 1, 0)
+
+[sub_resource type="Animation" id="Animation_0xm2m"]
+length = 0.001
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/MeshPivot/MeshScale/MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_ig7tw"]
+resource_name = "jump"
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/MeshPivot/MeshScale/MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.2, 1, 1, 0.5, 1, 0.46666667, 1, 1, 1, 1)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/MeshPivot/MeshScale/MeshInstance3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.2, 1, 0, 0.5, 0, 0.46666667, 1, 0, 1, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2yge"]
+_data = {
+&"Crouch": SubResource("Animation_h2yge"),
+&"RESET": SubResource("Animation_0xm2m"),
+&"jump": SubResource("Animation_ig7tw")
+}
+
+[node name="Main" type="Node" unique_id=894778691]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1951644316]
+transform = Transform3D(0.7199346, -0.69205797, 0.052440546, 0.48276156, 0.5536251, 0.6785577, -0.49863368, -0.46320087, 0.73267287, 0, 41.362465, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1065205697 node_paths=PackedStringArray("meshroot", "CollisonHead", "delayjump", "Pivot", "anime")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22009945, 6.674212, 4.0341516)
+script = ExtResource("1_ig7tw")
+meshroot = NodePath("MeshPivot/MeshScale")
+CollisonHead = NodePath("CollisonHead")
+delayjump = NodePath("../delayjump")
+Pivot = NodePath("MeshPivot")
+anime = NodePath("../Jumpanime")
+hoverTime = 0.5
+hovergraph = 0.0
+curve = SubResource("Curve_ig7tw")
+
+[node name="MeshPivot" type="Node3D" parent="Player" unique_id=1291168544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshScale" type="Node3D" parent="Player/MeshPivot" unique_id=92969602]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/MeshPivot/MeshScale" unique_id=151810844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_ig7tw")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/MeshPivot/MeshScale/MeshInstance3D" unique_id=1023545025]
+transform = Transform3D(0.42855084, 0, 0, 0, 0.13835794, 0, 0, 0, 0.32612252, -0.06938326, 0.5730307, -0.42389333)
+mesh = SubResource("BoxMesh_h2yge")
+skeleton = NodePath("../../../..")
+
+[node name="CollisonHead" type="CollisionShape3D" parent="Player" unique_id=2002409182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14510584, 0.5134233, 0)
+shape = SubResource("SphereShape3D_ig7tw")
+
+[node name="CollisionLegs" type="CollisionShape3D" parent="Player" unique_id=1068433034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="Camera_Pivot" type="Node3D" parent="Player" unique_id=185424390]
+transform = Transform3D(0.99968815, -0.009752927, 0.022989843, 0, 0.92058665, 0.39053836, -0.024973035, -0.39041653, 0.92029953, -0.0892251, 0.25930184, 0.00032019615)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Camera_Pivot" unique_id=894650105]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.7319605, 0.68134713, 0, -0.68134713, 0.7319605, 8.9948635, 10.68257, 12.398763)
+fov = 90.0
+
+[node name="Level" type="Node3D" parent="." unique_id=2002632707]
+
+[node name="duck" type="StaticBody3D" parent="Level" unique_id=259996050]
+
+[node name="duck" type="MeshInstance3D" parent="Level/duck" unique_id=37509578]
+transform = Transform3D(0.8872546, 0, 0, 0, -0.1417495, 0, 0, 0, 2.8697996, 7.976, 2.066, 0.777)
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/duck" unique_id=1635237173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.976, 2.066, 0.777)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="pillar" type="StaticBody3D" parent="Level" unique_id=401731196]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/pillar" unique_id=1613641408]
+transform = Transform3D(0.02517912, 0, -2.8934417, 0, 4.812723, 0, 1.9612415, 0, 0.04718757, -0.1851387, 2.5467618, 3.903616)
+mesh = SubResource("BoxMesh_1bvp3")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Level/pillar" unique_id=405051127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1851387, 2.5183687, 3.8896542)
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1057582687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0105147, 0)
+mesh = SubResource("BoxMesh_ig7tw")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=722417380]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1892641776]
+shape = SubResource("ConvexPolygonShape3D_ig7tw")
+
+[node name="delayjump" type="Timer" parent="." unique_id=86476849]
+wait_time = 0.1
+one_shot = true
+
+[node name="Jumpanime" type="AnimationPlayer" parent="." unique_id=1142300357]
+libraries/ = SubResource("AnimationLibrary_h2yge")
+speed_scale = 0.5
+
+[connection signal="timeout" from="delayjump" to="Player" method="Delaytimer"]
